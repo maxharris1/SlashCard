@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Rails SlashCard: production" uuid="c8bf966f-f1d3-403c-8601-04c1724300a7">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/SlashCard_production</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Rails SlashCard: test" uuid="e00347e2-ce24-4c14-8e14-e3d48f3fd56a">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/SlashCard_test</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Rails SlashCard: development" uuid="b08a87de-7fed-4c49-9c28-05965bbd0b3e">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/SlashCard_development</jdbc-url>
+    </data-source>
+  </component>
+</project>

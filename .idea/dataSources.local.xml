@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails SlashCard: production" uuid="c8bf966f-f1d3-403c-8601-04c1724300a7">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" exact-version="0" />
+      <user-name>SlashCard</user-name>
+    </data-source>
+    <data-source name="Rails SlashCard: test" uuid="e00347e2-ce24-4c14-8e14-e3d48f3fd56a">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" exact-version="0" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>postgres</user-name>
+    </data-source>
+    <data-source name="Rails SlashCard: development" uuid="b08a87de-7fed-4c49-9c28-05965bbd0b3e">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" exact-version="0" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>postgres</user-name>
+    </data-source>
+  </component>
+</project>
