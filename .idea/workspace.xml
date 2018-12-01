@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6a9e8fba-a751-4d59-bc86-8116dd76e081" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/helpers/navigation_helper.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/layouts/navigation/collapsible_elements/_non_signed_in_links.html.erb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/layouts/navigation/collapsible_elements/_signed_in_links.html.erb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/pages/index/_userSigned_in_index.html.erb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/pages/index/_userSigned_out_index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.generators" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.generators" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.rakeTasks" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.rakeTasks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/SlashCard.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SlashCard.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/registrations_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/registrations_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/helpers/application_helper.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers/application_helper.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/helpers/pages_helper.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers/pages_helper.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/layouts/navigation/_collapsible_elements.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/navigation/_collapsible_elements.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/layouts/navigation/_header.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/navigation/_header.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/pages/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/pages/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/application.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/application.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/initializers/devise.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/initializers/devise.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
-    </list>
+    <list default="true" id="6a9e8fba-a751-4d59-bc86-8116dd76e081" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
     <ignored path="$PROJECT_DIR$/log/" />
@@ -130,8 +109,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/pages/index/_userSigned_out_index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="109" selection-start-line="2" selection-start-column="109" selection-end-line="2" selection-end-column="109" />
+            <state relative-caret-position="85">
+              <caret line="5" column="6" lean-forward="true" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -413,15 +392,16 @@
       <workItem from="1543510257364" duration="9748000" />
       <workItem from="1543529390323" duration="17490000" />
       <workItem from="1543626340329" duration="4652000" />
-      <workItem from="1543692400851" duration="2022000" />
+      <workItem from="1543692400851" duration="2065000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40035000" />
+    <option name="totallyTimeSpent" value="40078000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="966" height="1047" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23951435" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -741,8 +721,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/pages/index/_userSigned_out_index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="109" selection-start-line="2" selection-start-column="109" selection-end-line="2" selection-end-column="109" />
+        <state relative-caret-position="85">
+          <caret line="5" column="6" lean-forward="true" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
         </state>
       </provider>
     </entry>
