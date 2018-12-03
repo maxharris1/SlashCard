@@ -1,17 +1,42 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <div class="row">
+  <div class="navbar-wrapper">
+    <div class="container-fluid">
+      <nav class="navbar-default navbar-fixed-top">
+        <div class="container">
+
+            <%= link_to 'SlashCard', root_path, class: 'navbar-brand' %>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapsible-content" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
 
       <!-- Elements visible all the time -->
-      <div class="col-sm-7">
-        <%= render 'layouts/navigation/header' %>
-      </div><!-- col-sm-7 -->
+          <ul class="nav navbar-nav">
+            <li><%= link_to 'Schools', schools_path %></li>
+
+            <li><%= link_to 'Buy A Card', buycard_path%></li>
+
+            <li><%= link_to 'Campus Ambassador', campusambassador_path%></li>
+
+            <li><%= link_to "Our Team" , root_path(:anchor => "our_team") %></li>
+
+            <li><%= link_to "Contact" , root_path(:anchor => "contact") %></li>
+
+            <li><%= link_to 'FAQ', faq_path%></li>
+
+          </ul>
+
+
 
       <!-- Elements collapses on smaller devices -->
-      <div class="col-sm-5">
-        <%= render 'layouts/navigation/collapsible_elements' %>
-      </div><!-- col-sm-5 -->
 
-    </div><!-- row -->
-  </div><!-- container -->
-</nav>
+        <%= render 'layouts/navigation/collapsible_elements' %>
+
+
+        </div>
+
+      </nav>
+    </div>
+  </div>

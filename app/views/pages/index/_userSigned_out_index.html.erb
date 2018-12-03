@@ -1,6 +1,7 @@
 <div class=container">
 
-  <button type="button" class="btn btn-primary btn-lg btn-block "><%= link_to 'Login', login_path %></button>
+  <%= button_to "Student Login", login_path, :id => "login_button_user",
+                :class => "btn btn-primary btn-lg btn-block", :method => :get %>
   </br>
   <button type="button" class="btn btn-primary btn-lg btn-block ">Business Login</button>
 </div>
