@@ -1,2 +1,13 @@
 module UsersHelper
-end
+
+
+  def profile_signed_links_partial_path
+
+
+
+
+
+    end
+  end
+
+
