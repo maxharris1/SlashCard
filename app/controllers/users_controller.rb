@@ -3,4 +3,5 @@ class UsersController < ApplicationController
     @user = current_user
     @user_vendors = @user.vendors
   end
+
 end

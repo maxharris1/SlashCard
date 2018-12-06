@@ -6,12 +6,8 @@
   <hr>
 
 
-  <%= link_to edit_vendor_path(@vendors),method: :get,class: "btn btn-info btn-xs",form: {style: 'display:inline-block; margin:2px'} do %>
-    <i class="glyphicon glyphicon-edit"></i> Edit
-  <% end %><%= link_to profile_path,method: :get,class: "btn btn-success btn-xs",form: {style: 'display:inline-block; margin:2px'} do %>
+  <%= link_to school_path(@vendors_sid),method: :get,class: "btn btn-success btn-xs",form: {style: 'display:inline-block; margin:2px'} do %>
     <i class="glyphicon glyphicon-chevron-left"></i> Back
-  <% end %><%= button_to @vendors,method: :delete,data: {confirm: "Are you sure you want to delete this Vendor?"}, class: "btn btn-danger btn-xs",form: {style: 'display:inline-block;'} do %>
-    <i class="glyphicon glyphicon-trash"></i> Delete
   <% end %>
 
 </div>

@@ -5,6 +5,12 @@ class Vendor < ActiveRecord::Base
   validates :phone_number, presence: true
   validates :description, presence: true
   validates :user_id, presence: true
+  validates :school_id, presence: true
 
   belongs_to :user
+  belongs_to :school
+
+  geocoded_by :address
+  after_validation :geocode
+
 end

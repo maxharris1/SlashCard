@@ -10,6 +10,12 @@ class VendorsController < ApplicationController
 
   def show
 
+    @vendors_id = @vendors.user_id
+    @vendors_sid = @vendors.school_id
+  end
+
+  def vendorportal
+    @vendors = Vendor.find(params[:id])
   end
 
   def edit
@@ -37,7 +43,7 @@ class VendorsController < ApplicationController
   def update
     if @vendors.update(vendor_params)
       flash[:notice] = "Vendor was updated"
-      redirect_to vendor_path(@vendors)
+      redirect_to profile_path
     else
       flash[:notice] = "Vendor was not updated"
       render 'edit'
@@ -48,6 +54,7 @@ class VendorsController < ApplicationController
     #render plain: params[:article].inspect
 
     @vendors = Vendor.new(vendor_params)
+    @vendors.school_id = current_user.school_id
     @vendors.user_id = current_user.id
     @vendors.save
     if @vendors.save

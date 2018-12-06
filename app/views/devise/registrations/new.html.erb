@@ -29,7 +29,8 @@
   <%= f.password_field :password_confirmation,
                        placeholder: 'Password Confirmation',
                        class: 'form-control' %>
-  <%= f.submit 'Sign up', class: 'btn sign-up-button' %>
+<%=f.collection_select(:school_id,School.all,:id,:name) %>
+        <%= f.submit 'Sign up', class: 'btn sign-up-button' %>
 <% end %>
     </div>
   </div>

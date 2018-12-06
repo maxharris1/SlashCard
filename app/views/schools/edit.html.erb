@@ -1,0 +1,34 @@
+<div class="container">
+  <h1>Edit School: <%=@schools.name %></h1>
+  <%= bootstrap_form_for @schools do |f| %>
+
+    <% if @schools.errors.any? %>
+      <h2>The following errors prevented the article from saving:</h2>
+      <ul>
+        <% @schoolss.errors.full_messages.each do |msg|%>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <%= f.text_field :name,
+                     placeholder: 'School Name',
+                     class: 'form-control' %>
+    <%= f.text_field :address,
+                     placeholder: 'Address',
+                     class: 'form-control' %>
+    <%= f.text_field :amb_name,
+                     placeholder: 'Ambassador Name',
+                     class: 'form-control' %>
+    <%= f.text_field :amb_phone,
+                     placeholder: 'Ambassador Phone Number (XXXXXXXXXX) ',
+                     class: 'form-control' %>
+    <%= f.email_field :amb_email,
+                      placeholder: 'Ambassador Email',
+                      class: 'form-control' %>
+    <%= f.text_field :description,
+                     placeholder: 'School Description for view card',
+                     class: 'form-control' %>
+    <%= f.submit 'Create New School', class: 'btn-default sign-up-button' %>
+  <% end %>
+</div>
