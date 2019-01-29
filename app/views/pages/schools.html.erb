@@ -2,10 +2,25 @@
 <div class="container marketing">
   <h2 class="featurette-heading" style="text-align: center; margin-bottom: 65px; margin-top: 75px">Our Schools<span class="text-muted"></span></h2>
 
-  <!-- Three columns of text below the carousel -->
-  <%=render 'pages/schools/viewSchoolCard' %>
 
-  <hr class="featurette-divider">
+  <div class="container">
+    <% @schools.each_slice(3)  do |v| %>
+      <div class="row row-centered" id="school_cards">
+        <% v.each  do |v| %>
+          <div class="col-sm-6 col-lg-4" align="center" >
+            <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title"><%=v.name %></h5>
+              <%= link_to school_path(v), class: "btn btn-success btn-xs" do %>
+                <i class="glyphicon glyphicon-eye-open"></i> View
+              <% end %>
+            </div>
+          </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div><!-- /.container -->
 
 

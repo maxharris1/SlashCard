@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>New Discount</h1>
+  <%= bootstrap_form_for @discounts do |f| %>
+
+    <% if @discounts.errors.any? %>
+      <h2>The following errors prevented the article from saving:</h2>
+      <ul>
+        <% @discounts.errors.full_messages.each do |msg|%>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <%= f.text_field :discount,
+                     placeholder: 'Enter Discount Here',
+                     class: 'form-control' %>
+    <%= f.hidden_field :vendor_id, :value => params[:vendor_id]  %>
+    <%= f.submit 'Create New Discount', class: 'btn-default sign-up-button' %>
+  <% end %>
+</div>

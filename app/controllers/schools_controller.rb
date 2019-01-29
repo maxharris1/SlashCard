@@ -50,17 +50,29 @@ class SchoolsController < ApplicationController
 
   def show
   @school_vendors = @schools.vendors
-
-
-
-  @vendors = Vendor.all
+  load_map
   end
+
+  def load_map
+    @school_vendors = @schools.vendors
+    @school_lat = @schools.latitude
+    @school_lng = @schools.longitude
+
+    @hash = Gmaps4rails.build_markers(@school_vendors) do |v, marker|
+      marker.infowindow render_to_string(:partial => "/schools/vendorinfo", :locals => { :v => v})
+      marker.lat v.latitude
+      marker.lng v.longitude
+      marker.title v.name
+
+
+      end
+    end
 
 
 
   private
   def school_params
-    params.require(:school).permit(:name, :address,:description,:amb_email,:amb_name,:amb_phone, :lat, :lng)
+    params.require(:school).permit(:name, :address, :description, :amb_email, :amb_name, :amb_phone, :latitude, :longitude)
   end
 
 

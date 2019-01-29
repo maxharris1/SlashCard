@@ -1,21 +1,24 @@
 class VendorsController < ApplicationController
 
-  before_action :set_vendor, only: [:edit, :update, :show, :destroy]
+  before_action :set_vendor, only: [:edit, :update, :show,:vendorportal, :destroy]
 
 
 
   def new
     @vendors = Vendor.new
+
   end
 
   def show
-
+    @vendor_discounts = @vendors.discounts
     @vendors_id = @vendors.user_id
     @vendors_sid = @vendors.school_id
   end
 
   def vendorportal
+    @vendor_discounts = @vendors.discounts
     @vendors = Vendor.find(params[:id])
+    @discounts = Discount.new(vendor_id: params[:vendor_id])
   end
 
   def edit
@@ -45,13 +48,12 @@ class VendorsController < ApplicationController
       flash[:notice] = "Vendor was updated"
       redirect_to profile_path
     else
-      flash[:notice] = "Vendor was not updated"
+      flash[:alert] = "Vendor was not updated"
       render 'edit'
     end
   end
 
   def create
-    #render plain: params[:article].inspect
 
     @vendors = Vendor.new(vendor_params)
     @vendors.school_id = current_user.school_id
@@ -61,7 +63,7 @@ class VendorsController < ApplicationController
       flash[:notice] = "Vendor was successfully created"
       redirect_to profile_path
     else
-      flash[:notice] = "ERROR: Could not create vendor"
+      flash[:alert] = "ERROR: Could not create vendor"
       redirect_to profile_path
     end
 

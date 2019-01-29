@@ -30,6 +30,26 @@
   </table>
   </div>
 
-<div id="map"></div>
+  <div class="container" style='width: 80%;'>
+    <div id="map" style='width: 100%; height: 600px;'></div>
+    <div id="school_lat" school-lat="<%=@schools.latitude%>"></div>
+    <div id="school_lng" school-lng="<%=@schools.longitude%>"></div>
+  </div>
+
+  <div class="container">
+    <h1>vendor table</h1>
+  </div>
+
+  <script type="text/javascript">
+      var lat = document.getElementById('school_lat').getAttribute("school-lat");
+      var lng = document.getElementById('school_lng').getAttribute("school-lng");
+      handler = Gmaps.build('Google');
+      handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+          markers = handler.addMarkers(<%=raw @hash.to_json %>);
+          handler.bounds.extendWith(markers);
+          handler.getMap().setZoom(14);
+          handler.getMap().setCenter(new google.maps.LatLng(lat, lng));
+      });
+  </script>
 
 
