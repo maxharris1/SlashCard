@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181206185251) do
+ActiveRecord::Schema.define(version: 20190205193846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,15 +20,15 @@ ActiveRecord::Schema.define(version: 20181206185251) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "vendor_id", null: false
+    t.integer "vendor_id"
     t.index ["vendor_id"], name: "index_discounts_on_vendor_id"
   end
 
   create_table "schools", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "address", default: "", null: false
-    t.float "lat"
-    t.float "lng"
+    t.float "latitude"
+    t.float "longitude"
     t.text "description", default: "", null: false
     t.string "amb_name", default: "", null: false
     t.string "amb_email", default: "", null: false
@@ -50,6 +50,10 @@ ActiveRecord::Schema.define(version: 20181206185251) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "school_id", null: false
+    t.float "latitude"
+    t.float "longitude"
+    t.string "unique_session_id", limit: 20
+    t.boolean "has_Business"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

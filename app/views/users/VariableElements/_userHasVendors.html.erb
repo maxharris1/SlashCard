@@ -4,7 +4,7 @@
   <tr>
     <th>Name</th>
     <th>Description</th>
-    <th class=""></th>
+    <th><%= link_to 'Add Vendor', createvendor_path, class: "btn btn-primary btn-xs" %></th>
   </tr>
   </thead>
   <% @user_vendors.each do |v| %>
@@ -13,9 +13,10 @@
       <td><%= v.description %></td>
       <td> <%= link_to edit_vendor_path(v), class: "btn btn-info btn-xs" do %>
           <i class="glyphicon glyphicon-edit"></i> Edit
-        <% end %> <%= link_to vendor_path(v), class: "btn btn-success btn-xs" do %>
+          <% end %><%= link_to vendorportal_path(v), class: "btn btn-success btn-xs" do %>
           <i class="glyphicon glyphicon-eye-open"></i> View
         <% end %></td>
+
     </tr>
   <% end %>
 </table>

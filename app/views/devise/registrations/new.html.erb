@@ -29,7 +29,9 @@
   <%= f.password_field :password_confirmation,
                        placeholder: 'Password Confirmation',
                        class: 'form-control' %>
+        <%= f.check_box :has_Business,  label: 'Select if you are a business owner'   %>
 <%=f.collection_select(:school_id,School.all,:id,:name) %>
+
         <%= f.submit 'Sign up', class: 'btn sign-up-button' %>
 <% end %>
     </div>

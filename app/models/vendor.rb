@@ -9,7 +9,7 @@ class Vendor < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :school
-  has_many :discounts
+  has_many :discounts, dependent: :destroy
 
   geocoded_by :address
   after_validation :geocode

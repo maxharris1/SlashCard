@@ -22,6 +22,8 @@
       <tr>
         <td><%= v.name %></td>
         <td><%= v.description %></td>
+        <td><%= v.latitude %></td>
+        <td><%= v.longitude %></td>
         <td><%= link_to vendor_path(v), class: "btn btn-success btn-xs" do %>
             <i class="glyphicon glyphicon-eye-open"></i> View
           <% end %></td>
@@ -38,18 +40,42 @@
 
   <div class="container">
     <h1>vendor table</h1>
+    <h2>Current User location: <%=@user_coords%></h2>
   </div>
 
   <script type="text/javascript">
+      var userLocation;
+      var userLat, userLng;
       var lat = document.getElementById('school_lat').getAttribute("school-lat");
       var lng = document.getElementById('school_lng').getAttribute("school-lng");
+
       handler = Gmaps.build('Google');
       handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+
           markers = handler.addMarkers(<%=raw @hash.to_json %>);
           handler.bounds.extendWith(markers);
-          handler.getMap().setZoom(14);
+          handler.getMap().setZoom(15);
           handler.getMap().setCenter(new google.maps.LatLng(lat, lng));
+
+          if(navigator.geolocation)
+              navigator.geolocation.getCurrentPosition(displayOnMap);
+
+
       });
+
+      function displayOnMap(position){
+
+          userLat = position.coords.latitude;
+          userLng = position.coords.longitude;
+
+          userLocation = handler.addMarker({
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+              infowindow: "My location",
+
+          });
+
+      };
   </script>
 
 

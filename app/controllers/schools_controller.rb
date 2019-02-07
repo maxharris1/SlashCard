@@ -49,6 +49,11 @@ class SchoolsController < ApplicationController
   end
 
   def show
+  @user = current_user
+  @user_ip = get_ip()
+  @user_coords = Geocoder.coordinates(@user_ip)
+  @user_lat = @user_coords[0]
+  @user_lng = @user_coords[1]
   @school_vendors = @schools.vendors
   load_map
   end
@@ -58,15 +63,14 @@ class SchoolsController < ApplicationController
     @school_lat = @schools.latitude
     @school_lng = @schools.longitude
 
+
     @hash = Gmaps4rails.build_markers(@school_vendors) do |v, marker|
       marker.infowindow render_to_string(:partial => "/schools/vendorinfo", :locals => { :v => v})
       marker.lat v.latitude
       marker.lng v.longitude
       marker.title v.name
-
-
-      end
     end
+  end
 
 
 

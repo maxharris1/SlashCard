@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
 
   devise_for :users, :controllers => {:registrations => "registrations"}
-  resources :vendors
+  resources :vendors do
+    resources :discounts
+  end
   resources :schools
   resources :discounts
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -10,21 +12,16 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     get 'login', to: 'devise/sessions#new'
+    get 'signup', to: 'devise/registrations#new'
+    get 'createvendor', to: 'vendors#new'
+    get 'destroyvendor', to: 'vendors#destroy'
+
   end
 
-  devise_scope :user do
-    get 'signup', to: 'devise/registrations#new'
-  end
+
 
   get '/vendorportal/:id', to: 'vendors#vendorportal', as: 'vendorportal'
 
-
-  devise_scope :user do
-    get 'createvendor', to: 'vendors#new'
-  end
-  devise_scope :user do
-    get 'destroyvendor', to: 'vendors#destroy'
-  end
 
   get 'profile', to: 'users#profile'
   get 'schoolsindex', to: 'pages#schools'

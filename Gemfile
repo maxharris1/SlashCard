@@ -19,6 +19,7 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'geocoder'
+gem 'geokit'
 gem 'gmaps4rails'
 gem 'underscore-rails', '~> 1.8', '>= 1.8.3'
 # Use CoffeeScript for .coffee assets and views
@@ -34,6 +35,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'
 gem 'bootstrap_form'
 gem 'devise'
+gem 'devise-security'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
