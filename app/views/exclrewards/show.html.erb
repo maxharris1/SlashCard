@@ -1,0 +1,15 @@
+<div class="container">
+
+  <%if @exclr_is_r %>
+    <h2><%= @exclr_is_r %></h2>
+    <h2> Discount Redeemed!</h2>
+  <%else %>
+    <h2>user: <%=@exclr_uid.first_name%>  <%= @exclr_uid.last_name %></h2>
+    <h2>vendor: <%=@exlcr_vid%></h2>
+    <h2>discount: <%=@exclr_descr%></h2>
+    <h2>code: <%=@exclr_code%></h2>
+    <h2><%= @exclr_is_r %></h2>
+    <h2><%=image_tag @qr%></h2>
+    <%= link_to 'Redeem', redeemable_path(@exclrewards.id),class: "btn btn-primary btn-s" %><%= link_to 'Back', profile_path(),class: "btn btn-primary btn-s" %>
+  <%end %>
+</div>

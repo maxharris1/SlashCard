@@ -17,6 +17,7 @@
 
 
 </div>
+
   <div class="container">
     <table class="table table-striped custab">
       <thead>
@@ -31,4 +32,41 @@
       <% end %>
     </table>
   </div>
+
+  <hr class="featurette-divider">
+
+  <div class="container">
+    <%if current_user.visited?(@vendors) %>
+    <%=link_to "Add a Review", new_review_path(vendor_id: @vendors.id),class: "btn btn-success btn-xs"%>
+    <%end %>
+
+
+    <table class="table table-striped custab">
+      <h2>Reviews:</h2>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Rating</th>
+        <th>Date Posted</th>
+        <th>Likes</th>
+      </tr>
+      </thead>
+      <% @vendor_reviews.each do |v| %>
+        <tr>
+          <td><%= User.find(v.user_id).first_name %> <%=User.find(v.user_id).last_name %></td>
+          <td><%= v.description %></td>
+          <td><% v.rating.to_i.times do  %>
+              <span class="glyphicon glyphicon-star"></span>
+            <% end %><% v.blank_stars.times do %>
+              <span class="glyphicon glyphicon-star-empty"></span>
+            <% end %></td>
+          <td><%=((Time.current - v.created_at)/1.days).round%> days ago</td>
+          <td id="review_<%= v.id %>_likes"><%= render partial: "reviews/likes", :locals => { :v => v} %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <hr class="featurette-divider">
+
 </div>

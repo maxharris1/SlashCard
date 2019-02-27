@@ -1,0 +1,21 @@
+<h2><%=@schools.name%> Vendors:</h2>
+<table class="table table-striped custab">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th class=""></th>
+  </tr>
+  </thead>
+  <% @school_vendors.each do |v| %>
+    <tr>
+      <td><%= v.name %></td>
+      <td><%= v.description %></td>
+      <td><%= v.latitude %></td>
+      <td><%= v.longitude %></td>
+      <td><%= link_to vendor_path(v), class: "btn btn-success btn-xs" do %>
+          <i class="glyphicon glyphicon-eye-open"></i> View
+        <% end %></td>
+    </tr>
+  <% end %>
+</table>

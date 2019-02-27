@@ -7,7 +7,19 @@ class User < ApplicationRecord
 
 
   has_many :vendors, dependent: :destroy
+  has_many :redeemables
+  has_many :reviews
+  has_many :likes
+  has_many :exclrewards
   belongs_to :school
 
+  def likes?(review)
+    review.likes.where(user_id: id).any?
+  end
+
+
+  def visited?(vendor)
+    vendor.redeemables.where(user_id: id, is_redeemed: true).any?
+  end
 
 end

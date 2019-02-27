@@ -31,8 +31,9 @@
                        class: 'form-control' %>
         <%= f.check_box :has_Business,  label: 'Select if you are a business owner'   %>
 <%=f.collection_select(:school_id,School.all,:id,:name) %>
+        <%= f.hidden_field :redeem_code, :value => SecureRandom.urlsafe_base64(12).tr('+/=','xyz')%>
 
-        <%= f.submit 'Sign up', class: 'btn sign-up-button' %>
+        <%= f.submit 'Sign up', class: 'btn sign-up-button'%>
 <% end %>
     </div>
   </div>

@@ -1,0 +1,33 @@
+
+<div class="container">
+  <h2 align="center"><%= @vendor.name %></h2>
+  <div class="well col-xs-8 col-xs-offset-2">
+    <h4 class="center"><strong>Description: <%= @vendor.description %></strong></h4>
+    <hr>
+
+    <p>Address: <%=@vendor.address %></p>
+    <p>Phone
+      #: <%=@vendor.phone_number %></p>
+    <p>Email :<%=@vendor.email%></p>
+
+
+  </div>
+  <div class="container">
+    <table class="table table-striped custab">
+      <thead>
+      <tr>
+        <th>Discounts:</th>
+      </tr>
+      </thead>
+      <% @vendor_discounts.each do |v| %>
+        <tr>
+          <td><%= v.discount %></td>
+          <td><%= button_to "Redeem", redeemables_path(:user_id => current_user.id, :vendor_id => @vendor.id, :discount_id => v.id, :redeem_code => current_user.redeem_code, class: "btn btn-success btn-xs")%>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <div id="redeem_link"></div>
+
+</div>

@@ -1,0 +1,9 @@
+<h1 class="page-header">Review For <%= Vendor.where(id: @reviews_vid).name %></h1>
+
+
+<%= link_to 'Edit', edit_review_path(@reviews) %> |
+<%= link_to 'Back', vendor_path(@reviews.vendor_id) %>
+
+<div id="review_<%= @reviews.id %>_likes">
+  <%= render partial: "likes", locals: {review: @reviews} %>
+</div>

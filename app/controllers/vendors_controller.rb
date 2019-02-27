@@ -1,6 +1,7 @@
 class VendorsController < ApplicationController
 
-  before_action :set_vendor, only: [:edit, :update, :show,:vendorportal, :destroy]
+  before_action :set_vendor, only: [:edit, :update, :show,:vendorportal,:redeem_discount, :pendingdiscounts,:destroy]
+  before_action :authenticate_user!
 
 
 
@@ -13,12 +14,32 @@ class VendorsController < ApplicationController
     @vendor_discounts = @vendors.discounts
     @vendors_id = @vendors.user_id
     @vendors_sid = @vendors.school_id
+    @vendor_reviews = Review.where(vendor_id: params[:id])
   end
 
+
   def vendorportal
-    @vendor_discounts = @vendors.discounts
     @vendors = Vendor.find(params[:id])
-    @discounts = Discount.new(vendor_id: params[:vendor_id])
+    if is_owner?(@vendors)
+      @vendor_discounts = @vendors.discounts
+      @vendor_reviews = Review.where(vendor_id: params[:id])
+      @vendors = Vendor.find(params[:id])
+      @discounts = Discount.new(vendor_id: params[:vendor_id])
+      @active_redeemables = Redeemable.where(vendor_id: params[:id], is_redeemed: false)
+      @active_exclrewards = Exclreward.where(vendor_id: params[:id], is_redeemed: false)
+      @vendor_discounts = @vendors.discounts
+      @vendors = Vendor.find(params[:id])
+      @past_redeemables = Redeemable.where(vendor_id: params[:id], is_redeemed: true)
+      @past_exclrewards = Exclreward.where(vendor_id: params[:id], is_redeemed: true)
+    else
+      flash[:alert] = "Error: Must Be An Owner Of " + @vendors.name + " In Order To View This Page"
+      redirect_to root_path
+    end
+
+  end
+
+  def scan
+
   end
 
   def edit
@@ -73,4 +94,14 @@ class VendorsController < ApplicationController
   def vendor_params
     params.require(:vendor).permit(:name, :address,:description,:phone_number,:email)
   end
+
+
+  def sortable_columns
+    ["Redeemed at:"]
+  end
+
+  def is_owner?(vendor)
+    current_user.vendors.where(id: vendor.id).any?
+  end
+
 end

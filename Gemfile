@@ -21,6 +21,10 @@ gem 'uglifier', '>= 1.3.0'
 gem 'geocoder'
 gem 'geokit'
 gem 'gmaps4rails'
+gem 'rqrcode-with-patches', '~> 0.5.4'
+gem 'barby',  '~> 0.6.2'
+gem 'rqrcode','~> 0.4.2'
+gem 'rqrcode_png'
 gem 'underscore-rails', '~> 1.8', '>= 1.8.3'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -36,6 +40,7 @@ gem 'jquery-rails'
 gem 'bootstrap_form'
 gem 'devise'
 gem 'devise-security'
+gem 'pusher'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

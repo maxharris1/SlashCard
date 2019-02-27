@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>New Exclusive Discount</h1>
+  <%= bootstrap_form_for @exclrewards do |f| %>
+    <% if @exclrewards.errors.any? %>
+      <ul>
+        <% @exclrewards.errors.full_messages.each do |msg|%>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <%= f.text_field :description,
+                     placeholder: 'Enter Exclusive Discount Here',
+                     class: 'form-control' %>
+    <%= f.hidden_field :vendor_id, :value => params[:vendor_id]  %>
+    <%= f.hidden_field :user_id, :value => params[:user_id]  %>
+    <%= f.hidden_field :redeem_code, :value => params[:redeem_code]  %>
+    <%= f.hidden_field :manager_id, :value => params[:manager_id]  %>
+    <%= f.submit 'Create New Exclusive Discount', class: 'btn-default sign-up-button' %>
+  <% end %>
+</div>

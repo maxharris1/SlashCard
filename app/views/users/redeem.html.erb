@@ -1,0 +1,64 @@
+<div class="container">
+
+
+
+  <script>
+      // Material Design example
+      $(document).ready(function () {
+          $('#vendorTable').DataTable({
+              "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
+              "iDisplayLength": 5,
+              "order": [[ 1, "desc" ]],
+              "aoColumns": [
+                  { "bSortable": true },
+                  { "bSortable": false },
+                  { "bSortable": true },
+                  { "bSortable": false },
+              ]
+          });
+          $('#vendorTable_wrapper').find('label').each(function () {
+              $(this).parent().append($(this).children());
+          });
+          $('#vendorTable_wrapper .dataTables_filter').find('input').each(function () {
+              $('input').attr("placeholder", "Search");
+              $('input').removeClass('form-control-sm');
+          });
+          $('#vendorTable_wrapper .dataTables_length').addClass('d-flex flex-row');
+          $('#vendorTable_wrapper .dataTables_filter').addClass('md-form');
+          $('#vendorTable_wrapper select').removeClass(
+              'custom-select custom-select-sm form-control form-control-sm');
+          $('#vendorTable_wrapper select').addClass('mdb-select');
+          $('#vendorTable_wrapper .mdb-select').materialSelect();
+          $('#vendorTable_wrapper .dataTables_filter').find('label').remove();
+      });
+  </script>
+  <div class="well col-xs-8 col-xs-offset-2">
+    <h2>Are you at <%=@nearest_vendor.name %>?</h2>
+    <h3><%= link_to redeem_discount_path(@nearest_vendor.id), class: "btn btn-success btn-xs" do %>
+        <i class="glyphicon glyphicon-eye-open"></i> Redeem Discount
+      <% end %></h3>
+  </div>
+  <div class="container">
+    <table class="table table-striped custab" cellspacing="0"  id="vendorTable">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th class="th-sm">Distance</th>
+        <th>Type</th>
+      </tr>
+      </thead>
+      <% @vendor_list.each do |v| %>
+        <tr>
+          <td><%= v.name %></td>
+          <td><%= v.description %></td>
+          <td><%= v.distance_to([@uLat, @uLng]).round(2)%> mi</td>
+          <td><%= link_to redeem_discount_path(v.id), class: "btn btn-success btn-xs" do %>
+              <i class="glyphicon glyphicon-eye-open"></i> Redeem Discount
+            <% end %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+</div>

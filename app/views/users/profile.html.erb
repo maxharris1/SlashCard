@@ -1,25 +1,38 @@
+
+<script>
+    $(document).ready(function () {
+        $('#recentActivity').DataTable({
+            "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
+            "iDisplayLength": 5,
+            "order": [[ 1, "desc" ]],
+            "aoColumns": [
+                { "bSortable": false },
+                { "bSortable": false },
+                { "bSortable": true },
+            ]
+        });
+        $('#recentActivity_wrapper').find('label').each(function () {
+            $(this).parent().append($(this).children());
+        });
+        $('#recentActivity_wrapper .dataTables_filter').find('input').each(function () {
+            $('input').attr("placeholder", "Search");
+            $('input').removeClass('form-control-sm');
+        });
+        $('#recentActivity_wrapper .dataTables_length').addClass('d-flex flex-row');
+        $('#recentActivity_wrapper .dataTables_filter').addClass('md-form');
+        $('#recentActivity_wrapper select').removeClass(
+            'custom-select custom-select-sm form-control form-control-sm');
+        $('#recentActivity_wrapper select').addClass('mdb-select');
+        $('#recentActivity_wrapper .mdb-select').materialSelect();
+        $('#recentActivity_wrapper .dataTables_filter').find('label').remove();
+    });
+</script>
+
+
 <div class="container">
-<h1>Welcome <%= current_user.first_name %> <%= current_user.last_name %></h1>
-  <h2> Current Location: <%=@user_ip%></h2>
-
-  <%= link_to 'Edit Profile', edit_user_registration_path,class: "btn btn-primary btn-s" %>
-
-
-
-
-  <div class="container marketing">
-    <%= render is_vendor_owner_partial_path %>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
+  <%= render is_vendor_owner_partial_path %>
 </div>
-</div>
+
+
+
+

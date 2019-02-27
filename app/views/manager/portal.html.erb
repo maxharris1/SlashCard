@@ -1,0 +1,133 @@
+
+
+<div class="container">
+  <h2 align="center"><%= @vendors.name %></h2>
+  <div class="well col-xs-8 col-xs-offset-2">
+    <h4 class="center"><strong>Description: <%= @vendors.description %></strong></h4>
+    <hr>
+
+
+
+
+    <%= link_to edit_vendor_path(@vendors),method: :get,class: "btn btn-info btn-xs",form: {style: 'display:inline-block; margin:2px'} do %>
+      <i class="glyphicon glyphicon-edit"></i> Edit
+      <% end %><%= link_to profile_path,method: :get,class: "btn btn-success btn-xs",form: {style: 'display:inline-block; margin:2px'} do %>
+      <i class="glyphicon glyphicon-chevron-left"></i> Back
+      <% end %><%= button_to @vendors,method: :delete,data: {confirm: "Are you sure you want to delete this Vendor?"}, class: "btn btn-danger btn-xs",form: {style: 'display:inline-block;'} do %>
+      <i class="glyphicon glyphicon-trash"></i> Delete
+    <% end %>
+
+  </div>
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+
+    <div class="col-md-7 order-md-2">
+
+      <h2>Current Discounts</h2>
+
+      <table class="table table-striped custab">
+        <thead>
+        <tr>
+          <th>Discount:</th>
+          <th>Actions: <%= link_to "Add Discount", new_discount_path(vendor_id: @vendors.id), class: "btn btn-primary btn-xs" %></th>
+        </tr>
+        </thead>
+        <% @vendor_discounts.each do |v| %>
+          <tr>
+            <td><%= v.discount %></td>
+            <td><%= link_to edit_discount_path(v,vendor_id: @vendors.id),method: :get,class: "btn btn-info btn-xs",form: {style: 'display:inline-block; margin:2px'} do %>
+                <i class="glyphicon glyphicon-edit"></i> Edit
+                <% end %><%= button_to discount_path(v),method: :delete,data: {confirm: "Are you sure you want to delete this Vendor?"}, class: "btn btn-danger btn-xs",form: {style: 'display:inline-block;'} do %>
+                <i class="glyphicon glyphicon-trash"></i> Delete
+              <% end %></td>
+          </tr>
+        <% end %>
+      </table>
+
+
+    </div>
+
+    <div class="col-md-5 order-md-2">
+      <h2>Pending Discounts</h2>
+      <table class="table table-striped custab">
+        <thead>
+        <tr>
+          <th>Name:</th>
+          <th>Discount:</th>
+          <th>Time Created at:</th>
+          <th>Redeem:</th>
+        </tr>
+        </thead>
+        <% @active_redeemables.each do |v| %>
+          <tr>
+            <td><%= User.find(v.user_id).first_name %> <%=User.find(v.user_id).last_name %></td>
+            <td><%=Discount.find(v.discount_id).discount%></td>
+            <td><%= v.created_at %></td>
+            <td><%= form_tag (redeem_auth_path(v.vendor_id))%>
+              <%= text_field_tag :redeem_code,nil,placeholder: "Enter Redeem Code"%><%= submit_tag "Redeem", data: {"loading-text" => "Redeeming...", "complete-text" => "Redeemed!"}, class: "btn btn-success first-btn" %></td>
+          </tr>
+        <% end %>
+      </table>
+
+      <h2>Pending Exlusive Discounts</h2>
+      <table class="table table-striped custab">
+        <thead>
+        <tr>
+          <th>Name:</th>
+          <th>Time Created at:</th>
+          <th>Redeem:</th>
+        </tr>
+        </thead>
+        <% @active_exclrewards.each do |v| %>
+          <tr>
+            <td><%= User.find(v.user_id).first_name %> <%=User.find(v.user_id).last_name %></td>
+            <td><%= v.created_at %></td>
+            <td><%= form_tag (redeem_auth_path(v.vendor_id))%>
+              <%= text_field_tag :redeem_code,nil,placeholder: "Enter Redeem Code"%><%= submit_tag "Redeem", data: {"loading-text" => "Redeeming...", "complete-text" => "Redeemed!"}, class: "btn btn-success first-btn" %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+
+
+  </div>
+
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <h2>Recent Activity</h2>
+
+    <table class="table table-striped custab" cellspacing="0" id="recentActivity">
+      <thead>
+      <tr>
+        <th>Name:</th>
+        <th>Discount:</th>
+        <th class="th-sm">Redeemed at:</th>
+
+      </tr>
+      </thead>
+      <% @past_redeemables.each do |v| %>
+        <tr>
+          <td><%= User.find(v.user_id).first_name %> <%=User.find(v.user_id).last_name %></td>
+          <td><%=Discount.find(v.discount_id).discount%></td>
+          <td><%= v.updated_at %></td>
+          <td><%= link_to "Give Custom Discount",  new_exclreward_path(vendor_id: @vendors.id, user_id: User.find(v.user_id).id, redeem_code: User.find(v.user_id).redeem_code,manager_id: @managers.id), class: "btn btn-success btn-xs"%></td>
+        </tr>
+      <% end %>
+    </table>
+
+
+  </div>
+
+
+
+
+
+
+</div>
+
+
+

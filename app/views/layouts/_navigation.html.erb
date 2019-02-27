@@ -3,33 +3,8 @@
       <nav class="navbar-default navbar-fixed-top">
         <div class="container">
 
-            <%= link_to 'SlashCard', root_path, class: 'navbar-brand' %>
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapsible-content" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
 
-
-      <!-- Elements visible all the time -->
-          <ul class="nav navbar-nav">
-            <li><%= link_to 'Schools', schoolsindex_path %></li>
-
-            <li><%= link_to 'Buy A Card', buycard_path%></li>
-
-            <li><%= link_to 'Campus Ambassador', campusambassador_path%></li>
-
-            <li><%= link_to "Our Team" , root_path(:anchor => "our_team") %></li>
-
-            <li><%= link_to "Contact" , root_path(:anchor => "contact") %></li>
-
-            <li><%= link_to 'FAQ', faq_path%></li>
-
-          </ul>
-
-
-
+          <%= render 'layouts/navigation/nav_elements' %>
       <!-- Elements collapses on smaller devices -->
 
         <%= render 'layouts/navigation/collapsible_elements' %>

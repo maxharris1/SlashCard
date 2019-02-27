@@ -1,0 +1,12 @@
+<% if user_signed_in? && current_user.likes?(v) %>
+  <%= link_to  review_like_path(v), method: :delete,remote: true do %>
+    <span class="glyphicon glyphicon-thumbs-down"></span>
+    <%end %>
+<% else %>
+  <%= link_to review_like_path(v), method: :post, remote: true do %>
+    <span class="glyphicon glyphicon-thumbs-up"></span>
+    <%end%>
+<% end %>
+<%=v.likes.count %>
+
+

@@ -17,6 +17,14 @@ module UsersHelper
     end
   end
 
+  def discount_activity_log
+    if @user.redeemables.nil?
+      'users/VariableElements/userHasNoDiscounts'
+    else
+      'users/VariableElements/userHasDiscounts'
+    end
+  end
+
 end
 
 

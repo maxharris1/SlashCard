@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>New Review</h1>
+  <%= bootstrap_form_for @reviews do |f| %>
+
+    <% if @reviews.errors.any? %>
+      <ul>
+        <% @reviews.errors.full_messages.each do |msg|%>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <%= f.text_field :description,
+                     placeholder: 'Enter Review Here',
+                     class: 'form-control' %>
+    <%= f.select :rating, [ 0, 1, 2, 3, 4, 5 ], :prompt => 'Select One' %>
+    <%= f.hidden_field :vendor_id, :value => params[:vendor_id]  %>
+    <%= f.hidden_field :user_id, :value => current_user.id  %>
+    <%= f.submit 'Create New Review', class: 'btn-default sign-up-button' %>
+  <% end %>
+</div>

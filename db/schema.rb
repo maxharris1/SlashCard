@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190205193846) do
+ActiveRecord::Schema.define(version: 20190226235118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,69 @@ ActiveRecord::Schema.define(version: 20190205193846) do
     t.datetime "updated_at", null: false
     t.integer "vendor_id"
     t.index ["vendor_id"], name: "index_discounts_on_vendor_id"
+  end
+
+  create_table "exclrewards", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "vendor_id", null: false
+    t.string "redeem_code", default: "", null: false
+    t.text "description", default: "", null: false
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "is_redeemed", default: false
+    t.integer "manager_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "review_id"
+    t.integer "vendor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "managers", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "first_name", default: "", null: false
+    t.string "last_name", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "vendor_id"
+    t.index ["email"], name: "index_managers_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_managers_on_reset_password_token", unique: true
+  end
+
+  create_table "redeemables", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "vendor_id", null: false
+    t.integer "discount_id", null: false
+    t.string "redeem_code", default: "", null: false
+    t.text "description", default: "", null: false
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "is_redeemed", default: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "name", default: "", null: false
+    t.integer "rating", default: 0, null: false
+    t.integer "vendor_id", null: false
+    t.text "description", default: "", null: false
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "schools", force: :cascade do |t|
@@ -43,7 +106,6 @@ ActiveRecord::Schema.define(version: 20190205193846) do
     t.string "encrypted_password", default: "", null: false
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
-    t.string "school", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -53,7 +115,8 @@ ActiveRecord::Schema.define(version: 20190205193846) do
     t.float "latitude"
     t.float "longitude"
     t.string "unique_session_id", limit: 20
-    t.boolean "has_Business"
+    t.boolean "has_Business", default: false
+    t.string "redeem_code"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

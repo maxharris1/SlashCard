@@ -8,6 +8,8 @@ class RegistrationsController < Devise::RegistrationsController
                                   :email,
                                   :password,
                                   :password_confirmation,
+                                  :has_Business,
+                                  :redeem_code,
                                   :school_id)
   end
 
@@ -20,6 +22,8 @@ class RegistrationsController < Devise::RegistrationsController
                                   :current_password,
                                   :school_id)
   end
+
+
 
   def new
 

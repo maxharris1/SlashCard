@@ -1,0 +1,33 @@
+
+<div class="container">
+
+  <h1>Active Discounts for <%=@vendors.name %></h1>
+
+
+
+  <div class="container">
+    <table class="table table-striped custab">
+      <thead>
+      <tr>
+        <th>Name:</th>
+        <th>Discount:</th>
+        <th>Time Created at:</th>
+        <th>Redeem:</th>
+      </tr>
+      </thead>
+      <% @active_redeemables.each do |v| %>
+        <tr>
+          <td><%= User.find(v.user_id).first_name %> <%=User.find(v.user_id).last_name %></td>
+          <td><%=Discount.find(v.discount_id).discount%></td>
+          <td><%= v.created_at %></td>
+          <td><%= form_tag (redeem_auth_path(v.vendor_id))%>
+            <%= text_field_tag :redeem_code,nil,placeholder: "Enter Redeem Code"%><%= submit_tag "Redeem", data: {"loading-text" => "Redeeming...", "complete-text" => "Redeemed!"}, class: "btn btn-success first-btn" %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+
+
+

@@ -1,1 +1,86 @@
-<h1>Not a business owner</h1>
+<div class="container marketing">
+  <h1>Welcome <%= current_user.first_name %> <%= current_user.last_name %></h1>
+  <%= link_to 'My School', school_path(@user_school), class: "btn btn-primary btn-s" %>
+  <%= link_to 'Redeem Discount',redeem_path, class: "btn btn-primary btn-s" %>
+
+  <%= link_to 'Edit Profile', edit_user_registration_path,class: "btn btn-primary btn-s" %>
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+
+    <div class="col-md-7 order-md-2">
+      <h2>My Discounts</h2>
+      <table class="table table-striped custab" id="recentActivity">
+        <thead>
+        <tr>
+          <th>Vendor:</th>
+          <th>Discount:</th>
+          <th>Redeemed at:</th>
+        </tr>
+        </thead>
+        <% @user_redeemables.each do |v| %>
+          <tr>
+            <td><%= Vendor.find(v.vendor_id).name %></td>
+            <td><%=Discount.find(v.discount_id).discount%></td>
+            <td><%= v.updated_at %></td>
+          </tr>
+        <% end %>
+      </table>
+      <hr class="featurette-divider">
+
+    </div>
+
+    <div class="col-md-5 order-md-2">
+      <h2>My Pending Exclusive Discounts</h2>
+      <table class="table table-striped custab" id="recentActivity">
+        <thead>
+        <tr>
+          <th>Vendor:</th>
+          <th>Redeemed at:</th>
+        </tr>
+        </thead>
+        <% @user_exclrewards_p.each do |v| %>
+          <tr>
+            <td><%= Vendor.find(v.vendor_id).name %></td>
+            <td><%= v.updated_at %></td>
+            <td><%= link_to 'View', exclreward_path(v.id),class: "btn btn-primary btn-s" %></td>
+          </tr>
+        <% end %>
+      </table>
+
+      <hr class="featurette-divider">
+
+      <%if @user_pending.any? %>
+
+        <h2>Pending Discounts</h2>
+        <table class="table table-striped custab">
+          <thead>
+          <tr>
+            <th>Vendor:</th>
+            <th>Discount:</th>
+            <th class="th-sm">Created at:</th>
+            <th></th>
+          </tr>
+          </thead>
+          <% @user_pending.each do |v| %>
+            <tr>
+              <td><%= Vendor.find(v.vendor_id).name %></td>
+              <td><%=Discount.find(v.discount_id).discount%></td>
+              <td><%= v.created_at %></td>
+              <td><%= link_to 'View', redeemable_path(v.id),class: "btn btn-primary btn-s" %></td>
+            </tr>
+          <% end %>
+        </table>
+
+      <%end %>
+
+
+    </div>
+
+  </div>
+
+
+
+
+</div>

@@ -2,6 +2,7 @@
 class SchoolsController < ApplicationController
 
   before_action :set_school, only: [:edit, :update, :show, :destroy]
+  respond_to :js, :json, :html
 
 
   def index
@@ -49,19 +50,36 @@ class SchoolsController < ApplicationController
   end
 
   def show
-  @user = current_user
-  @user_ip = get_ip()
-  @user_coords = Geocoder.coordinates(@user_ip)
-  @user_lat = @user_coords[0]
-  @user_lng = @user_coords[1]
-  @school_vendors = @schools.vendors
-  load_map
+    @user = current_user
+    @school_vendors = @schools.vendors
+    load_map
+    @lat = session[:lat]
+    @lng = session[:lng]
+
+
+
+
+
   end
+
+  def getLoc
+    lat = params[:lat]
+    lng = params[:lng]
+    respond_to do |format|
+      format.html
+      format.json { render :json => { :lat => lat, :lng => lng
+      } }
+      session[:lat] = lat
+      session[:lng] = lng
+    end
+  end
+
 
   def load_map
     @school_vendors = @schools.vendors
     @school_lat = @schools.latitude
     @school_lng = @schools.longitude
+
 
 
     @hash = Gmaps4rails.build_markers(@school_vendors) do |v, marker|
@@ -77,6 +95,10 @@ class SchoolsController < ApplicationController
   private
   def school_params
     params.require(:school).permit(:name, :address, :description, :amb_email, :amb_name, :amb_phone, :latitude, :longitude)
+  end
+
+  def sortable_columns
+    ["distance", ""]
   end
 
 

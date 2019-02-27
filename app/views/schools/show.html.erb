@@ -1,29 +1,64 @@
 
-  <h2 align="center"><%= @schools.name %></h2>
+<script>
+    // Material Design example
+    $(document).ready(function () {
+        $('#vendorTable').DataTable({
+            "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
+            "iDisplayLength": 5,
+            "order": [[ 1, "desc" ]],
+            "aoColumns": [
+                { "bSortable": true },
+                { "bSortable": false },
+                { "bSortable": true },
+                { "bSortable": false },
+            ]
+        });
+        $('#vendorTable_wrapper').find('label').each(function () {
+            $(this).parent().append($(this).children());
+        });
+        $('#vendorTable_wrapper .dataTables_filter').find('input').each(function () {
+            $('input').attr("placeholder", "Search");
+            $('input').removeClass('form-control-sm');
+        });
+        $('#vendorTable_wrapper .dataTables_length').addClass('d-flex flex-row');
+        $('#vendorTable_wrapper .dataTables_filter').addClass('md-form');
+        $('#vendorTable_wrapper select').removeClass(
+            'custom-select custom-select-sm form-control form-control-sm');
+        $('#vendorTable_wrapper select').addClass('mdb-select');
+        $('#vendorTable_wrapper .mdb-select').materialSelect();
+        $('#vendorTable_wrapper .dataTables_filter').find('label').remove();
+    });
+</script>
+<h2 align="center"><%= @schools.name %></h2>
   <div class="well col-xs-8 col-xs-offset-2">
     <h4 class="center"><strong><%= @schools.description %></strong></h4>
     <hr>
       <%= link_to schoolsindex_path,class: "btn btn-success btn-xs",form: {style: 'display:inline-block; margin:2px'} do %>
       <i class="glyphicon glyphicon-chevron-left"></i> Back
       <% end %>
-
   </div>
   <div class="container">
   <h2><%=@schools.name%> Vendors:</h2>
-  <table class="table table-striped custab">
+
+  <table class="table table-striped custab" cellspacing="0"  id="vendorTable">
     <thead>
     <tr>
       <th>Name</th>
       <th>Description</th>
-      <th class=""></th>
+      <th class="th-sm">Distance</th>
+      <th>Type</th>
     </tr>
     </thead>
     <% @school_vendors.each do |v| %>
       <tr>
         <td><%= v.name %></td>
         <td><%= v.description %></td>
-        <td><%= v.latitude %></td>
-        <td><%= v.longitude %></td>
+        <% if @lat.nil? && @lng.nil?
+            @lat = @schools.latitude
+            @lng = @schools.longitude
+          end
+        %>
+        <td><%= v.distance_to([@lat, @lng]).round(2)%> mi</td>
         <td><%= link_to vendor_path(v), class: "btn btn-success btn-xs" do %>
             <i class="glyphicon glyphicon-eye-open"></i> View
           <% end %></td>
@@ -32,50 +67,61 @@
   </table>
   </div>
 
+
   <div class="container" style='width: 80%;'>
     <div id="map" style='width: 100%; height: 600px;'></div>
     <div id="school_lat" school-lat="<%=@schools.latitude%>"></div>
     <div id="school_lng" school-lng="<%=@schools.longitude%>"></div>
   </div>
 
-  <div class="container">
-    <h1>vendor table</h1>
-    <h2>Current User location: <%=@user_coords%></h2>
-  </div>
-
   <script type="text/javascript">
+
+          var userLat, userLng
+          if (navigator.geolocation)
+              navigator.geolocation.getCurrentPosition(getUserCoords);
+
+          function getUserCoords(position) {
+              userLat = position.coords.latitude;
+              userLng = position.coords.longitude;
+              $.ajax({
+                  method: "GET",
+                  url: "/getLoc",
+                  data: {lat: userLat, lng: userLng},
+                  dataType: 'json',
+                  success: function (data) {
+                      var data = JSON.parse(data);
+
+                      console.log(data["lat"]);
+                  },
+              }).done(function (data) {
+                  console.log(data)
+              });
+          }
+
+
+
       var userLocation;
-      var userLat, userLng;
       var lat = document.getElementById('school_lat').getAttribute("school-lat");
       var lng = document.getElementById('school_lng').getAttribute("school-lng");
-
       handler = Gmaps.build('Google');
       handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-
           markers = handler.addMarkers(<%=raw @hash.to_json %>);
           handler.bounds.extendWith(markers);
           handler.getMap().setZoom(15);
           handler.getMap().setCenter(new google.maps.LatLng(lat, lng));
-
-          if(navigator.geolocation)
-              navigator.geolocation.getCurrentPosition(displayOnMap);
-
+          displayOnMap(userLat, userLng);
 
       });
-
-      function displayOnMap(position){
-
-          userLat = position.coords.latitude;
-          userLng = position.coords.longitude;
-
+      function displayOnMap(lat, lng){
           userLocation = handler.addMarker({
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
+              lat: lat,
+              lng: lng,
               infowindow: "My location",
-
           });
-
+          console.log(userLng);
       };
+
+
   </script>
 
 

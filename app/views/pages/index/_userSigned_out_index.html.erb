@@ -3,5 +3,8 @@
   <%= button_to "Student Login", login_path, :id => "login_button_user",
                 :class => "btn btn-primary btn-lg btn-block", :method => :get %>
   </br>
-  <button type="button" class="btn btn-primary btn-lg btn-block ">Business Login</button>
+  <%= button_to "Manager Login", managerlogin_path, :id => "login_button_manager",
+                :class => "btn btn-primary btn-lg btn-block", :method => :get %>
+  </br>
+  <%= link_to 'Log out', destroy_manager_session_path, :method => :delete%>
 </div>
