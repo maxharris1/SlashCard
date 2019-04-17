@@ -24,6 +24,7 @@
           <td><%= v.discount %></td>
           <td><%= button_to "Redeem", redeemables_path(:user_id => current_user.id, :vendor_id => @vendor.id, :discount_id => v.id, :redeem_code => current_user.redeem_code, class: "btn btn-success btn-xs")%>
           </td>
+          <td id="discount_<%= v.id %>_favorites"><%= render partial: "discounts/favorites", :locals => { :v => v} %></td>
         </tr>
       <% end %>
     </table>

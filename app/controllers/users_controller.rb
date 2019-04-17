@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
 
 
+
   def profile
     @user = current_user
     @user_vendors = @user.vendors
@@ -11,6 +12,30 @@ class UsersController < ApplicationController
     @user_pending = Redeemable.where(user_id: current_user.id, is_redeemed: false)
     @user_exclrewards = Exclreward.where(user_id: current_user.id, is_redeemed: true)
     @user_exclrewards_p = Exclreward.where(user_id: current_user.id, is_redeemed: false)
+
+
+    @common_redeems = Redeemable.select(:discount_id).group(:discount_id).having("count(*) > 5").all
+
+    common_discounts = []
+    @common_redeems.each do |v|
+        common_discounts.push(v.discount_id)
+    end
+    @common_discounts = common_discounts
+    @user_favorites = current_user.favorites
+    # if @user_favorites.any?
+    #   render "updateFavorites.js.erb"
+    # end
+
+
+  end
+
+  def updateFavorites
+    @user_favorites = current_user.favorites
+    respond_to do |format|
+      format.js
+      format.html
+    end
+
   end
 
   def redeem

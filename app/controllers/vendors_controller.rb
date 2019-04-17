@@ -1,7 +1,7 @@
 class VendorsController < ApplicationController
 
   before_action :set_vendor, only: [:edit, :update, :show,:vendorportal,:redeem_discount, :pendingdiscounts,:destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: :vendorportal
 
 
 
@@ -92,7 +92,7 @@ class VendorsController < ApplicationController
 
   private
   def vendor_params
-    params.require(:vendor).permit(:name, :address,:description,:phone_number,:email)
+    params.require(:vendor).permit(:name, :address,:description,:phone_number,:email,:logo)
   end
 
 

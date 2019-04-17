@@ -32,88 +32,117 @@
 
 
 
-<div class="container">
-  <h2 align="center"><%= @vendors.name %></h2>
-  <div class="well col-xs-8 col-xs-offset-2">
-    <h4 class="center"><strong>Description: <%= @vendors.description %></strong></h4>
-    <hr>
+
+<div class="content-wrapper" style="margin-top: 50px">
+
+  <div class="row">
+    <div class="well col-xs-8 col-xs-offset-2">
+      <h2 align="center"><%= @vendors.name %></h2>
+      <h4 class="center"><strong>Description: <%= @vendors.description %></strong></h4>
+      <hr>
+
+      <%= link_to "Add Manager",  new_manager_registration_path(vendor_id: @vendors.id), class: "btn btn-primary btn-xs" %>
+
+
+      <%= link_to edit_vendor_path(@vendors),method: :get,class: "btn btn-info btn-xs",form: {style: 'display:inline-block; margin:2px'} do %>
+        <i class="glyphicon glyphicon-edit"></i> Edit
+        <% end %><%= link_to profile_path,method: :get,class: "btn btn-success btn-xs",form: {style: 'display:inline-block; margin:2px'} do %>
+        <i class="glyphicon glyphicon-chevron-left"></i> Back
+        <% end %><%= button_to @vendors,method: :delete,data: {confirm: "Are you sure you want to delete this Vendor?"}, class: "btn btn-danger btn-xs",form: {style: 'display:inline-block;'} do %>
+        <i class="glyphicon glyphicon-trash"></i> Delete
+      <% end %>
+
+    </div>
 
 
 
 
-    <%= link_to edit_vendor_path(@vendors),method: :get,class: "btn btn-info btn-xs",form: {style: 'display:inline-block; margin:2px'} do %>
-      <i class="glyphicon glyphicon-edit"></i> Edit
-      <% end %><%= link_to profile_path,method: :get,class: "btn btn-success btn-xs",form: {style: 'display:inline-block; margin:2px'} do %>
-      <i class="glyphicon glyphicon-chevron-left"></i> Back
-      <% end %><%= button_to @vendors,method: :delete,data: {confirm: "Are you sure you want to delete this Vendor?"}, class: "btn btn-danger btn-xs",form: {style: 'display:inline-block;'} do %>
-      <i class="glyphicon glyphicon-trash"></i> Delete
-    <% end %>
+    <hr class="featurette-divider">
+
+  <div class="row">
+    <div class="col-md-7 order-md-2">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Recent Activity</h4>
+          <div class="table-responsive">
+            <table class="table table-striped custab" cellspacing="0" id="recentActivity">
+              <thead>
+              <tr>
+                <th>Name:</th>
+                <th>Discount:</th>
+                <th class="th-sm">Redeemed at:</th>
+
+              </tr>
+              </thead>
+              <% @past_redeemables.each do |v| %>
+                <tr>
+                  <td><%= User.find(v.user_id).first_name %> <%=User.find(v.user_id).last_name %></td>
+                  <td><%=Discount.find(v.discount_id).discount%></td>
+                  <td><%= v.updated_at %></td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5 order-md-2">
+
+    <table class="table table-striped custab">
+      <h2>Reviews:</h2>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Rating</th>
+        <th>Date Posted</th>
+        <th>Likes</th>
+      </tr>
+      </thead>
+      <% @vendor_reviews.each do |v| %>
+        <tr>
+          <td><%= User.find(v.user_id).first_name %> <%=User.find(v.user_id).last_name %></td>
+          <td><%= v.description %></td>
+          <td><% v.rating.to_i.times do  %>
+              <span class="glyphicon glyphicon-star"></span>
+              <% end %><% v.blank_stars.times do %>
+              <span class="glyphicon glyphicon-star-empty"></span>
+            <% end %></td>
+          <td><%=((Time.current - v.created_at)/1.days).round%> days ago</td>
+          <td id="review_<%= v.id %>_likes"><%= render partial: "reviews/likes", :locals => { :v => v} %></td>
+        </tr>
+      <% end %>
+    </table>
 
   </div>
+  </div>
 
-  <%= link_to "Add Manager",  new_manager_registration_path(vendor_id: @vendors.id), class: "btn btn-primary btn-xs" %>
-
-
-  <hr class="featurette-divider">
-
-
-
-  <div class="row featurette">
-            <div class="col-md-7 order-md-2">
-              <h2>Recent Activity</h2>
-              <table class="table table-striped custab" cellspacing="0" id="recentActivity">
-                <thead>
-                <tr>
-                  <th>Name:</th>
-                  <th>Discount:</th>
-                  <th class="th-sm">Redeemed at:</th>
-
-                </tr>
-                </thead>
-                <% @past_redeemables.each do |v| %>
-                  <tr>
-                    <td><%= User.find(v.user_id).first_name %> <%=User.find(v.user_id).last_name %></td>
-                    <td><%=Discount.find(v.discount_id).discount%></td>
-                    <td><%= v.updated_at %></td>
-                  </tr>
-                <% end %>
-              </table>
-            </div>
-
-
-            <div class="col-md-5 order-md-2">
-
-                <%if current_user.visited?(@vendors) %>
-                  <%=link_to "Add a Review", new_review_path(vendor_id: @vendors.id),class: "btn btn-success btn-xs"%>
-                <%end %>
-                <table class="table table-striped custab">
-                  <h2>Reviews:</h2>
-                  <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Rating</th>
-                    <th>Date Posted</th>
-                    <th>Likes</th>
-                  </tr>
-                  </thead>
-                  <% @vendor_reviews.each do |v| %>
-                    <tr>
-                      <td><%= User.find(v.user_id).first_name %> <%=User.find(v.user_id).last_name %></td>
-                      <td><%= v.description %></td>
-                      <td><% v.rating.to_i.times do  %>
-                          <span class="glyphicon glyphicon-star"></span>
-                          <% end %><% v.blank_stars.times do %>
-                          <span class="glyphicon glyphicon-star-empty"></span>
-                        <% end %></td>
-                      <td><%=((Time.current - v.created_at)/1.days).round%> days ago</td>
-                      <td id="review_<%= v.id %>_likes"><%= render partial: "reviews/likes", :locals => { :v => v} %></td>
-                    </tr>
-                  <% end %>
-                </table>
-              </div>
-     </div>
 </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

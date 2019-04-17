@@ -21,6 +21,30 @@
       </div>
     <% end %>
   </div>
+
+
+
+
+  <div class="container" style='width: 80%;'>
+    <div id="map" style='width: 100%; height: 600px;'></div>
+  </div>
+
+<script>
+
+    var lat = 39.8283;
+    var lng = -98.5795;
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+        markers = handler.addMarkers(<%=raw @hash.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.getMap().setZoom(4);
+        handler.getMap().setCenter(new google.maps.LatLng(lat, lng));
+
+    });
+
+</script>
+
+
 </div><!-- /.container -->
 
 

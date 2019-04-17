@@ -1,8 +1,10 @@
 
 <div class="container">
-<h2 align="center"><%= @vendors.name %></h2>
+
 <div class="well col-xs-8 col-xs-offset-2">
-  <h4 class="center"><strong>Description: <%= @vendors.description %></strong></h4>
+  <h2 align="center"><%= @vendors.name %></h2>
+  <h2 class="vendor_img" align="center"><%= image_tag @vendors.logo.url(:medium) %></h2>
+  <h4 align="center"><strong><%= @vendors.description %></strong></h4>
   <hr>
 
   <p>Address: <%=@vendors.address %></p>
@@ -36,7 +38,7 @@
   <hr class="featurette-divider">
 
   <div class="container">
-    <%if current_user.visited?(@vendors) %>
+    <%if user_signed_in? && current_user.visited?(@vendors) %>
     <%=link_to "Add a Review", new_review_path(vendor_id: @vendors.id),class: "btn btn-success btn-xs"%>
     <%end %>
 
@@ -68,5 +70,46 @@
     </table>
   </div>
   <hr class="featurette-divider">
+
+  <h2 align="center">Contact Us</h2>
+  <form id="contact-form" class="con-form">
+    <div class="row" style="margin-bottom: 25px">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="form_name">First Name*</label>
+          <input id="form_name" type="text" name="name" class="form-control" required="required" data-error="Firstname is required.">
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="form_lastname">Last Name*</label>
+          <input id="form_lastname" type="text" name="surname" class="form-control"  required="required" data-error="Lastname is required.">
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-bottom:30px">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="form_email text-right">Email Address*</label>
+          <input id="form_email" type="email" name="email" class="form-control"  required="required" data-error="Valid email is required.">
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="form_lastname">General Inquiry*</label>
+          <textarea onkeyup="auto_grow(this)" rows="1" id="contactarea" type="text" name="surname" class="form-control"  required="required" data-error="Lastname is required."></textarea>
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <input type="submit" class="btn btn-success btn-send btn-lg" value="Submit" align="center">
+    </div>
+
+  </form>
 
 </div>

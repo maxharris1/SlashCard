@@ -10,6 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
                                   :password_confirmation,
                                   :has_Business,
                                   :redeem_code,
+                                  :avatar,
                                   :school_id)
   end
 
@@ -20,6 +21,7 @@ class RegistrationsController < Devise::RegistrationsController
                                   :password,
                                   :password_confirmation,
                                   :current_password,
+                                  :avatar,
                                   :school_id)
   end
 

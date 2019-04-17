@@ -31,9 +31,17 @@
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
+    </br>
+
+
     <%=f.label :school_id %>
     <%=f.collection_select(:school_id,School.all,:id,:name) %>
+
+    <h4>Upload a new profile image</h4>
+    <%= f.file_field :avatar %>
+    </br>
   <div class="actions">
+
     <%= f.hidden_field :redeem_code, :value => SecureRandom.urlsafe_base64(12).tr('+/=','xyz')%>
     <%= f.submit "Update" %>
   </div>

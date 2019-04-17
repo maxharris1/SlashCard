@@ -1,0 +1,249 @@
+
+<script>
+
+    $(function() {
+        $('#order-listing').DataTable({
+            "aLengthMenu": [
+                [5, 10, 15, -1],
+                [5, 10, 15, "All"]
+            ],
+            "iDisplayLength": 10,
+            "language": {
+                search: ""
+            },
+
+            "aoColumns": [
+                null,
+                { "bSortable": false },
+                null,
+                null,
+                null
+            ]
+
+        });
+        $('#order-listing').each(function () {
+            var datatable = $(this);
+            // SEARCH - Add the placeholder for Search and Turn this into in-line form control
+            var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+            search_input.attr('placeholder', 'Search');
+            search_input.removeClass('form-control-sm');
+            // LENGTH - Inline-Form control
+            var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+            length_sel.removeClass('form-control-sm');
+        });
+    });
+
+    $(function() {
+        $('#recentActivity').DataTable({
+            "aLengthMenu": [
+                [5, 10, 15, -1],
+                [5, 10, 15, "All"]
+            ],
+            "iDisplayLength": 5,
+            "language": {
+                search: ""
+            },
+
+            "aoColumns": [
+                null,
+                null,
+                null
+            ]
+
+        });
+        $('#recentActivity').each(function () {
+            var datatable = $(this);
+            //SEARCH - Add the placeholder for Search and Turn this into in-line form control
+            var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+            search_input.attr('placeholder', 'Search');
+            search_input.removeClass('form-control-sm');
+            // LENGTH - Inline-Form control
+            var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+            length_sel.removeClass('form-control-sm');
+        });
+    });
+
+
+</script>
+
+
+<div class="content-wrapper" style="margin-top: 50px">
+
+  <div class="row">
+
+    <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-header card-header-warning card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">local_offer</i>
+          </div>
+          <p class="card-category">Total Discounts Redeemed</p>
+          <h3 class="card-title"><%= @past_redeemables.count%>
+          </h3>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="material-icons">date_range</i>
+            <p class="text-muted mb-0 font-weight-light"><%=@recent_redeemables.count%>  Redeemed This Week</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-header card-header-warning card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">local_play</i>
+          </div>
+          <p class="card-category">Total Rewards Redeemed</p>
+          <h3 class="card-title"><%= @past_exclrewards.count%>
+          </h3>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="material-icons">date_range</i>
+            <p class="text-muted mb-0 font-weight-light"><%=@recent_exclrewards.count%> Rewards This Week</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-header card-header-warning card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">rate_review</i>
+          </div>
+          <p class="card-category">Reviews</p>
+          <h3 class="card-title"><%= @reviews.count%>
+          </h3>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <% @average_rating.times do  %>
+              <i class="material-icons">star</i>
+              <% end %><% @blank_stars.times do %>
+              <i class="material-icons">star_border</i>
+            <% end %>
+            <p class="text-muted mb-0 font-weight-light">Average Rating</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-header card-header-warning card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">people</i>
+          </div>
+          <p class="card-category">Followers</p>
+          <h3 class="card-title">Followers count
+          </h3>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="material-icons">date_range</i>
+            <p class="text-muted mb-0 font-weight-light">X  This Week</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row" style="margin-top: 35px">
+    <div class="col-md-5 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="table-responsive">
+              <table id="order-listing" class="table dataTable no-footer container-fluid dt-bootstrap4 custab table-striped table-hover" role="grid" aria-describedby="order-listing_info">
+                <thead>
+                <tr role="row">
+                  <th class="sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Order #: activate to sort column descending" style="width: 65px;">Name</th>
+                  <th tabindex="0"  rowspan="1" colspan="1"  style="width: 117px;">Comments</th>
+                  <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 81px;">Rating</th>
+                  <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Ship to: activate to sort column ascending" style="width: 59px;">Date Posted</th>
+                  <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Base Price: activate to sort column ascending" style="width: 90px;">Likes</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @reviews.each do |v| %>
+                  <tr>
+                    <td><%= User.find(v.user_id).first_name %> <%=User.find(v.user_id).last_name %></td>
+                    <td><%= v.description %></td>
+                    <td><% v.rating.to_i.times do  %>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <% end %><% v.blank_stars.times do %>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                      <% end %></td>
+                    <td><%=((Time.current - v.created_at)/1.days).round%> days ago</td>
+                    <td><%= v.likes.count %></td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+    </div>
+  </div>
+    <div class="col-md-7 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table dataTable no-footer container-fluid dt-bootstrap4 table-hover table-striped custab" cellspacing="0" id="recentActivity">
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>Discount</th>
+                <th class="th-sm">Redeemed at</th>
+
+              </tr>
+              </thead>
+              <% @past_redeemables.each do |v| %>
+                <tr>
+                  <td><%= User.find(v.user_id).first_name %> <%=User.find(v.user_id).last_name %></td>
+                  <td><%=Discount.find(v.discount_id).discount%></td>
+                  <td><%= v.updated_at %></td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+</div>
+
+
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table  no-footer container-fluid sortable-table table-hover table-striped custab" cellspacing="0">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Discount</th>
+            <th class="th-sm">Redeemed at</th>
+
+          </tr>
+          </thead>
+          <% @past_redeemables.each do |v| %>
+            <tr>
+              <td><%= User.find(v.user_id).first_name %> <%=User.find(v.user_id).last_name %></td>
+              <td><%=Discount.find(v.discount_id).discount%></td>
+              <td><%= v.updated_at %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+

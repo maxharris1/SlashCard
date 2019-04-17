@@ -26,7 +26,8 @@
     <%= f.text_field :description,
                          placeholder: 'Brief description of your business',
                          class: 'form-control' %>
-
+    <%= f.file_field :logo, placeholder: "upload a logo for your business" %>
     <%= f.submit 'Create New Vendor', class: 'btn-default sign-up-button' %>
   <% end %>
 </div>
+

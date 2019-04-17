@@ -1,0 +1,35 @@
+
+<div class="content-wrapper" style="margin-top: 50px">
+
+  <div class="container">
+    <%= bootstrap_form_for @vendors do |f| %>
+
+      <% if @vendors.errors.any? %>
+        <h2>The following errors prevented the vendor from updating:</h2>
+        <ul>
+          <% @vendors.errors.full_messages.each do |msg|%>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <%= f.text_field :name,
+                       placeholder: 'Business Name',
+                       class: 'form-control' %>
+      <%= f.text_field :address,
+                       placeholder: 'Address',
+                       class: 'form-control' %>
+      <%= f.email_field :email,
+                        placeholder: 'Email',
+                        class: 'form-control' %>
+      <%= f.text_field :phone_number,
+                       placeholder: 'Phone Number (XXXXXXXXXX) ',
+                       class: 'form-control' %>
+      <%= f.text_field :description,
+                       placeholder: 'Brief description of your business',
+                       class: 'form-control' %>
+      <%= f.file_field :logo %>
+      <%= f.submit 'Edit Vendor', class: 'btn-default sign-up-button' %>
+    <% end %>
+  </div>
+</div>

@@ -63,12 +63,43 @@ body {
 .dropdown-toggle, .dropdown-menu {
   background: $navbarColor !important;
   border: none;
-}
 
+}
+.dropdown-menu{
+  position: absolute;
+  overflow: visible;
+  z-index: 1000;
+
+}
 .dropdown-menu a:hover {
   color: black !important;
   background: white !important;
 }
+.navbar-logo{
+  padding: 5px;
+}
+
+ .navbar-logo > img {
+   float: left !important;
+   height: 40px !important;
+   width: auto;
+   margin-top: 5px;
+}
+.navbar-nav > li{
+  vertical-align: middle !important;
+}
+.nav_profile img{
+  height: 25px;
+  width: auto;
+  border-radius: 50%;
+  border: 1px solid #134659;
+}
+#user-settings{
+  padding: 14px;
+  vertical-align: center !important;
+}
+
+
 
 
 

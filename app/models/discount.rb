@@ -6,5 +6,6 @@ class Discount < ApplicationRecord
 
 
   belongs_to :vendor
+  has_many :favorites
 
 end

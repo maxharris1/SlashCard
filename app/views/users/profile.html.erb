@@ -6,8 +6,8 @@
             "iDisplayLength": 5,
             "order": [[ 1, "desc" ]],
             "aoColumns": [
-                { "bSortable": false },
-                { "bSortable": false },
+                { "bSortable": true},
+                { "bSortable": true },
                 { "bSortable": true },
             ]
         });
@@ -23,9 +23,22 @@
         $('#recentActivity_wrapper select').removeClass(
             'custom-select custom-select-sm form-control form-control-sm');
         $('#recentActivity_wrapper select').addClass('mdb-select');
-        $('#recentActivity_wrapper .mdb-select').materialSelect();
+        // $('#recentActivity_wrapper .mdb-select').materialSelect();
         $('#recentActivity_wrapper .dataTables_filter').find('label').remove();
     });
+
+    $(function () {
+        if ($('#favorites').length > 0) {
+            console.log($('#favorites').length);
+            $('#favs').click(function () {
+                $.getScript('updateFavorites');
+            });
+        }
+    });
+
+
+
+
 </script>
 
 

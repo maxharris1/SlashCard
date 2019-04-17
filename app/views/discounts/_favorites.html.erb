@@ -1,0 +1,10 @@
+<% if user_signed_in? && current_user.favorites?(v) %>
+  <%= link_to discount_favorite_path(v.id),method: :delete, remote: true do %>
+    <span class="mdi mdi-heart mdi-18px"></span>
+    <%end%>
+<% else %>
+  <%= link_to discount_favorite_path(v.id),method: :post, remote: true do%>
+    <span class="mdi mdi-heart-outline mdi-18px"></span>
+    <%end%>
+<% end %>
+

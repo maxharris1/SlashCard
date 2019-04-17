@@ -27,13 +27,13 @@ class DiscountsController < ApplicationController
   def destroy
     @discounts.destroy
     flash[:notice] = "Discount was deleted"
-    redirect_to vendorportal_path(@discounts.vendor_id)
+    redirect_to portal_path
   end
 
   def update
     if @discounts.update(discount_params)
       flash[:notice] = "Discount was updated"
-      redirect_to vendorportal_path(@discounts.vendor_id)
+      redirect_to discountmanager_path
     else
       flash[:alert] = "Discount was not updated"
       render 'edit'
@@ -46,7 +46,7 @@ class DiscountsController < ApplicationController
     @discounts.save
     if @discounts.save
       flash[:notice] = "Discount was successfully created"
-      redirect_to vendorportal_path(@discounts.vendor_id)
+      redirect_to discountmanager_path
     else
       flash[:alert] = "ERROR: Could not create discount"
       render 'new'

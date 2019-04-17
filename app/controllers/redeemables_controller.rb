@@ -10,7 +10,6 @@ class RedeemablesController < ApplicationController
 
   def show
     @redeemable_is_r = @redeemables.is_redeemed
-    puts @redeemable_is_r
     if @redeemable_is_r
       redirect_to profile_path, notice: "Redeemed Discount"
     end
@@ -61,14 +60,16 @@ class RedeemablesController < ApplicationController
   def redeem
       @code = params[:redeem_code]
       @vendor = Vendor.find(params[:id])
-      @redeemable = Redeemable.where(redeem_code: @code, vendor_id: @vendor.id, is_redeemed: false)
-      if @redeemable.nil?
-        redirect_to vendorportal_path(@vendor.id), notice: "Could not find this Discount."
+      @redeemables = Redeemable.where(redeem_code: @code, vendor_id: @vendor.id, is_redeemed: false)
+      if @redeemables.nil?
+        redirect_to portal_path, notice: "Could not find this Discount."
       else
-        @redeemable.update(is_redeemed: true)
-        redirect_to vendorportal_path(@vendor.id), notice: "You Redeemed this Discount"
+        @redeemables.update(is_redeemed: true)
+          redirect_to portal_path, notice: "You Redeemed this Discount"
       end
+
   end
+
 
   def create
     #render plain: params[:article].inspect

@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     resources :discounts
   end
   resources :schools
-  resources :discounts
+  resources :discounts do
+    resource :favorite, module: :discounts
+  end
   resources :redeemables
   resources :exclrewards
   resources :reviews do
@@ -21,6 +23,7 @@ Rails.application.routes.draw do
     get 'signup', to: 'devise/registrations#new'
     get 'createvendor', to: 'vendors#new'
     get 'destroyvendor', to: 'vendors#destroy'
+    get 'updateFavorites', to: 'users#updateFavorites'
 
   end
 
@@ -28,12 +31,19 @@ Rails.application.routes.draw do
     get 'managerlogin', to: 'manager/sessions#new'
     get 'managersignup', to: 'manager/registrations#new'
     get 'portal', to: 'manager#portal'
+    get 'discountmanager', to: 'manager#discount_manager'
+    get 'vendorinfo', to: 'manager#vendor_info'
+    get 'pending_discounts_portal', to: 'manager#pending_discounts_portal'
+    get 'pending_exclusive_rewards', to: 'manager#pending_exclusive_rewards'
+    get 'dashboard', to: 'manager#dashboard'
+
 
 
   end
 
   get'/getLoc', to: 'schools#getLoc', as: :getLoc
 
+  post '/exclusiveredeem/:id', to: 'exclrewards#redeem', as: 'excredeem_auth'
   post '/redeem/:id', to: 'redeemables#redeem', as: 'redeem_auth'
   # get 'getLoc', to: 'schools#getLoc'
   get '/pendingdiscounts/:id/', to: 'vendors#pendingdiscounts', as: 'pending_discounts'
@@ -43,6 +53,7 @@ Rails.application.routes.draw do
   get 'redeem', to: 'users#redeem', as: 'redeem'
   get 'profile', to: 'users#profile'
   get 'schoolsindex', to: 'pages#schools'
+  get 'locationindex', to: 'pages#locations'
 
   get 'buycard', to: 'pages#buycard'
 

@@ -62,12 +62,13 @@ class ExclrewardsController < ApplicationController
   def redeem
     @code = params[:redeem_code]
     @vendor = Vendor.find(params[:id])
-    @exlcr = Exclreward.where(redeem_code: @code, vendor_id: @vendor.id, is_redeemed: false)
-    if @exlcr.nil?
-      redirect_to vendorportal_path(@vendor.id), notice: "Could not find this Exclusive Reward."
+    @exlcrewards = Exclreward.where(redeem_code: @code, vendor_id: @vendor.id, manager_id: current_manager.id, is_redeemed: false)
+    puts @exclrewards
+    if @exlcrewards.nil?
+      redirect_to portal_path, notice: "Could not find this Exclusive Reward."
     else
-      @exlcr.update(is_redeemed: true)
-      redirect_to vendorportal_path(@vendor.id), notice: "You Redeemed this Exclusive Reward"
+      @exlcrewards.update(is_redeemed: true)
+      redirect_to portal_path, notice: "You Redeemed this Exclusive Reward"
     end
   end
 
@@ -77,12 +78,7 @@ class ExclrewardsController < ApplicationController
     @exclrewards.save
     if @exclrewards.save
       flash[:notice] = "Redeemable Token created"
-      if manager_signed_in?
-        redirect_to portal_path
-      else
-        redirect_to vendorportal_path(@exclrewards.vendor_id)
-      end
-
+      redirect_to portal_path
     else
       flash[:alert] = "ERROR: Could not create Redeemable Token"
       render "new"

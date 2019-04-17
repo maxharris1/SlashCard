@@ -7,6 +7,7 @@
             "iDisplayLength": 5,
             "order": [[ 1, "desc" ]],
             "aoColumns": [
+                { "bSortable": false },
                 { "bSortable": true },
                 { "bSortable": false },
                 { "bSortable": true },
@@ -43,6 +44,7 @@
   <table class="table table-striped custab" cellspacing="0"  id="vendorTable">
     <thead>
     <tr>
+      <th>Logo</th>
       <th>Name</th>
       <th>Description</th>
       <th class="th-sm">Distance</th>
@@ -51,7 +53,10 @@
     </thead>
     <% @school_vendors.each do |v| %>
       <tr>
-        <td><%= v.name %></td>
+
+        <td class="vendor_logo" align="center" valign="center"><%= image_tag v.logo.url(:thumb)%></td>
+
+        <td valign="center"><%= v.name %></td>
         <td><%= v.description %></td>
         <% if @lat.nil? && @lng.nil?
             @lat = @schools.latitude

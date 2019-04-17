@@ -33,6 +33,8 @@
 <%=f.collection_select(:school_id,School.all,:id,:name) %>
         <%= f.hidden_field :redeem_code, :value => SecureRandom.urlsafe_base64(12).tr('+/=','xyz')%>
 
+        <%= f.file_field :avatar,placeholder:'Upload a Profile Image' %>
+
         <%= f.submit 'Sign up', class: 'btn sign-up-button'%>
 <% end %>
     </div>

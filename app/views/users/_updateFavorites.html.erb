@@ -1,0 +1,21 @@
+
+<h2>Favorite Discounts</h2>
+<table class="table table-striped custab">
+  <thead>
+  <tr>
+    <th>Vendor</th>
+    <th>Discount</th>
+    <th>Redeem</th>
+  </tr>
+  </thead>
+  <% @user_favorites.each do |v| %>
+    <tr>
+      <td><%= Vendor.find(v.vendor_id).name %></td>
+      <td><%=Discount.find(v.discount_id).discount%></td>
+      <td><%= button_to "Redeem", redeemables_path(:user_id => current_user.id, :vendor_id => v.vendor_id, :discount_id => v.discount_id, :redeem_code => current_user.redeem_code, class: "btn btn-success btn-xs")%></td>
+      <td><%= link_to discount_favorite_path(v.discount_id),method: :delete, remote: true do %>
+        <span class="mdi mdi-heart mdi-18px"></span>
+      <%end%></td>
+    </tr>
+  <% end %>
+</table>
