@@ -15,6 +15,7 @@ class VendorsController < ApplicationController
     @vendors_id = @vendors.user_id
     @vendors_sid = @vendors.school_id
     @vendor_reviews = Review.where(vendor_id: params[:id])
+    puts @vendor_reviews
   end
 
 

@@ -32,6 +32,7 @@ class ManagerController < ApplicationController
 
     @active_redeemables = Redeemable.where(vendor_id: @vendors.id, is_redeemed: false)
     @active_exclrewards = Exclreward.where(vendor_id: @vendors.id, is_redeemed: false)
+    puts @active_redeemables
 
     @past_redeemables = Redeemable.where(vendor_id: @vendors.id, is_redeemed: true)
     @past_exclrewards = Exclreward.where(vendor_id: @vendors.id, is_redeemed: true)
